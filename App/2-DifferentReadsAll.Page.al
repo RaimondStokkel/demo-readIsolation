@@ -1,6 +1,6 @@
-page 50100 DifferentReads
+page 50101 DifferentReadsAll
 {
-    Caption = 'DifferentReads';
+    Caption = 'DifferentReadsAll';
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
@@ -67,7 +67,7 @@ page 50100 DifferentReads
                 begin
                     //Lock the customer record
                     customer.LockTable();
-                    Customer.FindFirst();
+                    Customer.FindSet();
                     if not Confirm('Lock customer?') then
                         Error('');
 
@@ -83,7 +83,7 @@ page 50100 DifferentReads
                     Customer: Record Customer;
                 begin
                     Customer.ReadIsolation := IsolationLevel::RepeatableRead;
-                    Customer.FindFirst();
+                    Customer.FindSet();
                     if not confirm('Repeatable read') then
                         Error('');
                     Message(Format(Customer.Blocked));
@@ -99,7 +99,7 @@ page 50100 DifferentReads
                     Customer: Record Customer;
                 begin
                     Customer.ReadIsolation := IsolationLevel::ReadCommitted;
-                    Customer.FindFirst();
+                    Customer.FindSet();
                     Message(Format(Customer.Blocked));
                 end;
             }
@@ -113,7 +113,7 @@ page 50100 DifferentReads
                     Customer: Record Customer;
                 begin
                     Customer.ReadIsolation := IsolationLevel::ReadUnCommitted;
-                    Customer.FindFirst();
+                    Customer.FindSet();
                     Message(Format(Customer.Blocked));
                 end;
             }
